@@ -8,8 +8,10 @@ from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.mjcf_utils import CustomMaterial, array_to_string, find_elements
 from robosuite.utils.observables import Observable, sensor
 
+from gym.utils import EzPickle
 
-class TwoArmPegInHole(TwoArmEnv):
+
+class TwoArmPegInHole(TwoArmEnv, EzPickle):
     """
     This class corresponds to the peg-in-hole task for two robot arms.
 
@@ -206,6 +208,37 @@ class TwoArmPegInHole(TwoArmEnv):
             camera_widths=camera_widths,
             camera_depths=camera_depths,
             camera_segmentations=camera_segmentations,
+            renderer=renderer,
+            renderer_config=renderer_config,
+        )
+
+        EzPickle.__init__(
+            robots=robots,
+            env_configuration=env_configuration,
+            controller_configs=controller_configs,
+            gripper_types=gripper_types,
+            initialization_noise=initialization_noise,
+            use_camera_obs=use_camera_obs,
+            use_object_obs=use_object_obs,
+            reward_scale=reward_scale,
+            reward_shaping=reward_shaping,
+            peg_radius=peg_radius,
+            peg_length=peg_length,
+            has_renderer=has_renderer,
+            has_offscreen_renderer=has_offscreen_renderer,
+            render_camera=render_camera,
+            render_collision_mesh=render_collision_mesh,
+            render_visual_mesh=render_visual_mesh,
+            render_gpu_device_id=render_gpu_device_id,
+            control_freq=control_freq,
+            horizon=horizon,
+            ignore_done=ignore_done,
+            hard_reset=hard_reset,
+            camera_names=camera_names,
+            camera_heights=camera_heights,
+            camera_widths=camera_widths,
+            camera_depths=camera_depths,
+            camera_segmentations=camera_segmentations,  # {None, instance, class, element}
             renderer=renderer,
             renderer_config=renderer_config,
         )

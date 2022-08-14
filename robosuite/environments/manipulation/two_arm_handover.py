@@ -10,8 +10,10 @@ from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.observables import Observable, sensor
 from robosuite.utils.placement_samplers import UniformRandomSampler
 
+from gym.utils import EzPickle
 
-class TwoArmHandover(TwoArmEnv):
+
+class TwoArmHandover(TwoArmEnv, EzPickle):
     """
     This class corresponds to the handover task for two robot arms.
 
@@ -222,6 +224,39 @@ class TwoArmHandover(TwoArmEnv):
             camera_widths=camera_widths,
             camera_depths=camera_depths,
             camera_segmentations=camera_segmentations,
+            renderer=renderer,
+            renderer_config=renderer_config,
+        )
+
+        EzPickle.__init__(
+            robots=robots,
+            env_configuration=env_configuration,
+            controller_configs=controller_configs,
+            gripper_types=gripper_types,
+            initialization_noise=initialization_noise,
+            prehensile=prehensile,
+            table_full_size=table_full_size,
+            table_friction=table_friction,
+            use_camera_obs=use_camera_obs,
+            use_object_obs=use_object_obs,
+            reward_scale=reward_scale,
+            reward_shaping=reward_shaping,
+            placement_initializer=placement_initializer,
+            has_renderer=has_renderer,
+            has_offscreen_renderer=has_offscreen_renderer,
+            render_camera=render_camera,
+            render_collision_mesh=render_collision_mesh,
+            render_visual_mesh=render_visual_mesh,
+            render_gpu_device_id=render_gpu_device_id,
+            control_freq=control_freq,
+            horizon=horizon,
+            ignore_done=ignore_done,
+            hard_reset=hard_reset,
+            camera_names=camera_names,
+            camera_heights=camera_heights,
+            camera_widths=camera_widths,
+            camera_depths=camera_depths,
+            camera_segmentations=camera_segmentations,  # {None, instance, class, element}
             renderer=renderer,
             renderer_config=renderer_config,
         )
