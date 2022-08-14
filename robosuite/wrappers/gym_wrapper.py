@@ -51,7 +51,7 @@ class GymWrapper(Wrapper, Env):
 
         # Gym specific attributes
         self.env.spec = None
-        self.metadata = None
+        self.metadata = {"render.modes": ["human"]}
 
         # set up observation and action spaces
         obs = self.env.reset()
@@ -142,7 +142,7 @@ class GymWrapper(Wrapper, Env):
         """
         # Dummy args used to mimic Wrapper interface
         return self.env.reward()
-    
+
     def __getstate__(self):
         """See `Object.__getstate__.
         Returns:
@@ -151,8 +151,8 @@ class GymWrapper(Wrapper, Env):
         # the viewer object is not pickleable
         # we first make a copy of the viewer
         env = self.env
-        
-        if 'viewer' in env.__dict__ and not None:
+
+        if "viewer" in env.__dict__ and not None:
             _viewer = env.viewer
             # remove the viewer and make a copy of the state
             env.viewer = None
@@ -162,10 +162,10 @@ class GymWrapper(Wrapper, Env):
             # the returned state doesn't have the viewer
             return state
         return self.__dict__
-    
+
     def __setstate__(self, state):
         """See `Object.__setstate__.
         Args:
             state (dict): Unpickled state of this object.
         """
-        self.__init__(state['env'])
+        self.__init__(state["env"])
