@@ -3,7 +3,7 @@ This file implements a wrapper for facilitating compatibility with OpenAI gym.
 This is useful when using these environments with code that assumes a gym-like 
 interface.
 """
-
+import copy
 import numpy as np
 from gym import spaces
 from gym.core import Env
@@ -142,3 +142,30 @@ class GymWrapper(Wrapper, Env):
         """
         # Dummy args used to mimic Wrapper interface
         return self.env.reward()
+    
+    def __getstate__(self):
+        """See `Object.__getstate__.
+        Returns:
+            dict: The instance’s dictionary to be pickled.
+        """
+        # the viewer object is not pickleable
+        # we first make a copy of the viewer
+        env = self.env
+        
+        if 'viewer' in env.__dict__ and not None:
+            _viewer = env.viewer
+            # remove the viewer and make a copy of the state
+            env.viewer = None
+            state = copy.deepcopy(self.__dict__)
+            # assign the viewer back to self.__dict__
+            env.viewer = _viewer
+            # the returned state doesn't have the viewer
+            return state
+        return self.__dict__
+    
+    def __setstate__(self, state):
+        """See `Object.__setstate__.
+        Args:
+            state (dict): Unpickled state of this object.
+        """
+        self.__init__(state['env'])
