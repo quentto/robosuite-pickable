@@ -143,6 +143,15 @@ class GymWrapper(Wrapper, Env):
         # Dummy args used to mimic Wrapper interface
         return self.env.reward()
 
+    def render(self, mode):
+        """
+        By default, run the normal environment render() function without mode
+
+        Args:
+            **kwargs (dict): Any args to pass to environment render function
+        """
+        return self.env.render()
+
     def __getstate__(self):
         """See `Object.__getstate__.
         Returns:
