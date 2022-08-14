@@ -229,6 +229,7 @@ class TwoArmHandover(TwoArmEnv, EzPickle):
         )
 
         EzPickle.__init__(
+            self,
             robots=robots,
             env_configuration=env_configuration,
             controller_configs=controller_configs,
