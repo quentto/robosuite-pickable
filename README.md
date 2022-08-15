@@ -1,8 +1,15 @@
-# robosuite
+# robosuite-pickable
 
 ![gallery of_environments](docs/images/gallery.png)
 
 [**[Homepage]**](https://robosuite.ai/) &ensp; [**[White Paper]**](https://arxiv.org/abs/2009.12293) &ensp; [**[Documentations]**](https://robosuite.ai/docs/overview.html) &ensp; [**[ARISE Initiative]**](https://github.com/ARISE-Initiative)
+
+-------
+## Pickable Environments
+- Robosuite environments are now pickable
+- Environments can be used in parallel by algorithms like SAC or MT-SAC (e.g. [garage](http://github.com/rlworkgroup/garage))
+- Fixes: """TypeError: no default reduce due to non-trivial cinit"""
+- To see robosuite environments used by multiple workers in garage, go to [robosuite-garage](http://github.com/rlworkgroup/garage)
 
 -------
 ## Latest Updates
