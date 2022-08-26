@@ -380,7 +380,11 @@ class MujocoXMLObject(MujocoObject, MujocoXML):
         template = self.get_site_attrib_template()
         template["rgba"] = "1 0 0 0"
         template["name"] = "default_site"
-        obj.append(ET.Element("site", attrib=template))
+        #obj.append(ET.Element("site", attrib=template))
+        #for line 383 i got this error (first run of robosuite)
+        #in old version of robosuite I had not this problem
+	#TypeError: append() argument must be xml.etree.ElementTree.Element, not Element
+
 
         return obj
 
