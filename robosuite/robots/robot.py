@@ -282,7 +282,12 @@ class Robot(object):
         # Torque limit values pulled from relevant robot.xml file
         low = self.sim.model.actuator_ctrlrange[self._ref_joint_actuator_indexes, 0]
         high = self.sim.model.actuator_ctrlrange[self._ref_joint_actuator_indexes, 1]
-
+        #print(low, high) 
+        #printed for robots from demos and used for wx250s
+        low = [-32 -32 -32 -32 -32 -13 -13] 
+        high = [32, 32, 32, 32, 32, 13, 13]
+        #ValueError: operands could not be broadcast together with shapes (7,) (0,) (0,) 
+        #single_arm.py", line 254, in control self.torques = np.clip(torques, low, high)
         return low, high
 
     @property

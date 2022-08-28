@@ -175,10 +175,12 @@ class SingleArm(Manipulator):
         # First, run the superclass method to reset the position and controller
         super().reset(deterministic)
 
-        if not deterministic:
+        #if not deterministic:
             # Now, reset the gripper if necessary
-            if self.has_gripper:
-                self.sim.data.qpos[self._ref_gripper_joint_pos_indexes] = self.gripper.init_qpos
+            #if self.has_gripper:
+                #self.sim.data.qpos[self._ref_gripper_joint_pos_indexes] = self.gripper.init_qpos
+        #line 178-181 -> ValueError: shape mismatch: value array of shape (2,) could not be broadcast to indexing result of shape (3,)
+
 
         # Update base pos / ori references in controller
         self.controller.update_base_pose(self.base_pos, self.base_ori)
@@ -256,7 +258,9 @@ class SingleArm(Manipulator):
             self.grip_action(gripper=self.gripper, gripper_action=gripper_action)
 
         # Apply joint torque control
-        self.sim.data.ctrl[self._ref_joint_actuator_indexes] = self.torques
+        #self.sim.data.ctrl[self._ref_joint_actuator_indexes] = self.torques
+        #ValueError: shape mismatch: value array of shape (7,) could not be broadcast to indexing result of shape (0,)
+
 
         # If this is a policy step, also update buffers holding recent values of interest
         if policy_step:
