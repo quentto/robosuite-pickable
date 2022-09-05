@@ -1,6 +1,16 @@
 <mujoco model="wx250s">
     <!--compiler angle="radian" meshdir="../meshes/" /-->
     <!--size njmax="500" nconmax="100" -->
+    <!-- Problem with torques is solved after adding actuators and limits -->
+    <actuator>
+        <motor ctrllimited="true" ctrlrange="-80.0 80.0" joint="waist" name="torq_j1"/>
+        <motor ctrllimited="true" ctrlrange="-80.0 82.0" joint="shoulder" name="torq_j2"/>
+        <motor ctrllimited="true" ctrlrange="-80.0 82.0" joint="elbow" name="torq_j3"/>
+        <motor ctrllimited="true" ctrlrange="-80.0 82.0" joint="forearm_roll" name="torq_j4"/>
+        <motor ctrllimited="true" ctrlrange="-80.0 82.0" joint="wrist_angle" name="torq_j5"/>
+        <motor ctrllimited="true" ctrlrange="-13.0 13.0" joint="wrist_rotate" name="torq_j6"/>
+        <motor ctrllimited="true" ctrlrange="-13.0 13.0" joint="gripper" name="torq_j7"/>
+    </actuator>
     <asset>
         <mesh name="wx250s_1_base" file="wx250s_1_base.stl" scale="0.001 0.001 0.001" />
         <mesh name="wx250s_2_shoulder" file="wx250s_2_shoulder.stl" scale="0.001 0.001 0.001" />
@@ -22,13 +32,13 @@
         <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_1_base" rgba="0 150 0 1"/>
         <geom quat="0.707107 0 0 0.707107" type="mesh" contype="0" conaffinity="0" group="1" mesh="wx250s_1_base" name="wx250s/wx250s_1_base" rgba="1 1 1 1" />
         <body name="wx250s/shoulder_link" pos="0 0 0.072">
-            <inertial pos="2.23482e-05 4.14609e-05 0.0066287" quat="-0.491122 0.490302 0.508681 0.509556" mass="0.480879" diaginertia="0.000588946 0.000555655 0.000378999" />
-            <joint name="waist" pos="0 0 0" axis="0 0 1" limited="true" range="-60.14158 60.14158" frictionloss="0.1" />
+            <inertial pos="2.23482e-05 4.14609e-05 0.0066287" quat="-0.491122 0.490302 0.508681 0.509556" mass="4.80879" diaginertia="0.000588946 0.000555655 0.000378999" />
+            <joint name="waist" pos="0 0 0" axis="0 0 1" limited="true" range="-30.14158 30.14158"  frictionloss="0.1" />
             <geom pos="0 0 -0.003" quat="0.707107 0 0 0.707107" type="mesh" contype="0" conaffinity="0" group="1" mesh="wx250s_2_shoulder" name="wx250s/shoulder_link" rgba="1 1 1 1" />
             <geom pos="0 0 -0.003" quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_2_shoulder" />
             <body name="wx250s/upper_arm_link" pos="0 0 0.03865">
-                <inertial pos="0.0171605 2.725e-07 0.191323" quat="0 0.0665624 0 0.997782" mass="0.430811" diaginertia="0.00364425 0.003463 0.000399348" />
-                <joint name="shoulder" pos="0 0 0" axis="0 1 0" limited="true" range="0.88496 40.98968" frictionloss="0.1" />
+                <inertial pos="0.0171605 2.725e-07 0.191323" quat="0 0.0665624 0 0.997782" mass="4.30811" diaginertia="0.00364425 0.003463 0.000399348" />
+                <joint name="shoulder" pos="0 0 0" axis="0 1 0" limited="true" range="-10.88496 10.98968" frictionloss="0.1" />
                 <geom quat="-0.707107 0 0 0.707107" pos="0 0 0" type="mesh" contype="0" conaffinity="0" group="1" mesh="wx250s_3_upper_arm" name="wx250s/upper_arm_link" rgba="1 1 1 1" />
                 <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_3_upper_arm" />
                 <body name="wx250s/upper_forearm_link" pos="-0.04975 0 0.25">
@@ -48,14 +58,14 @@
                             <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_6_wrist" />
                             <body name="wx250s/gripper_link" pos="0.065 0 0">
                                 <inertial pos="0.0325296 4.2061e-07 0.0090959" quat="4.5806e-06 0.787961 -2.3346e-05 0.615725" mass="0.110084" diaginertia="0.00307449 0.00306151 0.00304637" />
-                                <joint name="wrist_rotate" pos="0 0 0" axis="1 0 0" limited="true" range="-3.14158 3.14158" frictionloss="0.1" />
+                                <joint name="wrist_rotate" pos="0 0 0" axis="1 0 0" limited="true" range="-30.14158 30.14158" frictionloss="0.1" />
                                 <geom pos="-0.02 0 0" quat="0.707107 0 0 0.707107" type="mesh" contype="0" conaffinity="0" group="1" mesh="wx250s_7_gripper" name="wx250s/gripper_link" rgba="1 1 1 1" />
                                 <geom pos="-0.02 0 0" quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_7_gripper" />
                                 <!--geom pos="-0.02 0 0" quat="0.707107 0 0 0.707107" type="mesh" contype="0" conaffinity="0" group="1" mesh="wx250s_9_gripper_bar" name="wx250s/gripper_bar" rgba="1 1 1 1" />
                                 
                                 <geom pos="-0.02 0 0" quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_9_gripper_bar" /-->
                                 <body name="wx250s/gripper_prop_link" pos="-0.02 0 0">
-                                            <joint name="gripper" pos="-0.02 0 0" axis="0 0 1" limited="true" range="-20.28319 20.28319" damping="0.01" frictionloss="0.01"/>
+                                            <joint name="gripper" pos="-0.02 0 0" axis="0 0 1" limited="true" range="-30.28319 30.28319" damping="0.01" frictionloss="0.01"/>
                                            
                                             <body name="right_hand" pos="-0.0367 0 0" quat="0 0 0 1">
                                                 <inertial pos="0.02 0 0" mass="0.05" diaginertia="0.05 0.05 0.05" />

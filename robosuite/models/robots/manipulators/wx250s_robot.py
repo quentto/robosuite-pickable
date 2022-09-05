@@ -33,8 +33,8 @@ class wx250s(ManipulatorModel):
 
     @property
     def init_qpos(self):
-        return np.array([3.192, 3.680, -0.000, 1.170, 0.050, 3.760, 3.142])
-
+    	return np.array([2.692, -6.680, 4.000, 3.170, 1.550, 1.760, 3.142])
+	
     @property
     def base_xpos_offset(self):
         return {

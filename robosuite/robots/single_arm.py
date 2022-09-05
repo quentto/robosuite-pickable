@@ -181,6 +181,10 @@ class SingleArm(Manipulator):
                 #self.sim.data.qpos[self._ref_gripper_joint_pos_indexes] = self.gripper.init_qpos
         #line 178-181 -> ValueError: shape mismatch: value array of shape (2,) could not be broadcast to indexing result of shape (3,)
 
+        print(self.gripper.init_qpos)
+        print(self._ref_gripper_joint_pos_indexes)
+        print(self.sim.data.qpos)
+
 
         # Update base pos / ori references in controller
         self.controller.update_base_pose(self.base_pos, self.base_ori)
@@ -258,15 +262,22 @@ class SingleArm(Manipulator):
             self.grip_action(gripper=self.gripper, gripper_action=gripper_action)
 
         # Apply joint torque control
-        #self.sim.data.ctrl[self._ref_joint_actuator_indexes] = self.torques
-        #ValueError: shape mismatch: value array of shape (7,) could not be broadcast to indexing result of shape (0,)
+
+        #print for checking the positions
+        #print(self.torques)
+        
+        self.sim.data.ctrl[self._ref_joint_actuator_indexes] = self.torques
+
+        #print for checking the positions
+        #print(self.sim.data.ctrl)
 
 
         # If this is a policy step, also update buffers holding recent values of interest
         if policy_step:
             # Update proprioceptive values
             self.recent_qpos.push(self._joint_positions)
-            self.recent_actions.push(action)
+            #self.recent_actions.ush(action)
+            #AttributeError: 'DeltaBuffer' object has no attribute 'ush'
             self.recent_torques.push(self.torques)
             self.recent_ee_forcetorques.push(np.concatenate((self.ee_force, self.ee_torque)))
             self.recent_ee_pose.push(np.concatenate((self.controller.ee_pos, T.mat2quat(self.controller.ee_ori_mat))))
