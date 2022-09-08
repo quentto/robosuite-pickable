@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     # Choose controller
     #controller_name = choose_controller()
-    controller_name = "OSC_POSITION"
+    controller_name = "OSC_POSE"
     # Load the desired controller
     options["controller_configs"] = suite.load_controller_config(default_controller=controller_name)
 

@@ -2,47 +2,37 @@
     
     <size njmax="500" nconmax="100" />
     <asset>
-        <mesh name="wx250s_7_gripper" file="meshes/wx250s_gripper/wx250s_7_gripper.stl" scale="0.001 0.001 0.001" />
-        <mesh name="wx250s_8_gripper_prop" file="meshes/wx250s_gripper/wx250s_8_gripper_prop.stl" scale="0.001 0.001 0.001" />
         <mesh name="wx250s_9_gripper_bar" file="meshes/wx250s_gripper/wx250s_9_gripper_bar.stl" scale="0.001 0.001 0.001" />
         <mesh name="wx250s_10_gripper_finger" file="meshes/wx250s_gripper/wx250s_10_gripper_finger.stl" scale="0.001 0.001 0.001" />
     </asset>
-        <actuator>
+    <actuator>
         <position ctrllimited="true" ctrlrange="-0.0115 0.020833" joint="right_finger" kp="1000" name="gripper_r_finger_joint" forcelimited="true" forcerange="-20 20"/>
         <position ctrllimited="true" ctrlrange="-0.020833 0.0115" joint="left_finger" kp="1000" name="gripper_l_finger_joint" forcelimited="true" forcerange="-20 20"/>
     </actuator>
     <worldbody>
     <body>
-    	<!--geom pos="-0.02 0 0" quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_7_gripper" />
-	<geom type="mesh" contype="0" quat="0.707107 0 0 0.707107" conaffinity="0" group="1" mesh="wx250s_7_gripper" name="wx250s_7_gripper" pos="-0.02 0 0" rgba="1 1 1 1"/-->
-	  <geom pos="0 0 0" quat="-0.707107 0 0 -0.707107" type="mesh" mesh="wx250s_9_gripper_bar" />
-        <geom type="mesh" contype="0" quat="0.707107 0 0 0.707107" conaffinity="0" group="1" mesh="wx250s_9_gripper_bar" name="wx250s_9_gripper_bar" pos="0 0 0" rgba="1 1 1 1"/>
-           <site name="ft_frame" pos="0.05 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
-           <body name="eef" pos="0.10 0 0" quat="0.707107 -0.707107 0.707107 -0.707107">
+     <geom pos="0 0 0" quat="0 -0.707107 -0.707107 0" type="mesh" mesh="wx250s_9_gripper_bar" />
+        <geom type="mesh" contype="0" quat="0 -0.707107 -0.707107 0" conaffinity="0" group="1" mesh="wx250s_9_gripper_bar" name="wx250s_9_gripper_bar" pos="0 0 0" rgba="1 1 1 1"/>
+           <site name="ft_frame" pos="-0.055 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1" />
+           <body name="eef" pos="-0.11 0 0" quat="0.707107 -0.707107 0.707107 -0.707107">
                 <site name="grip_site" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 0.5" type="sphere" group="1"/>
                 <site name="ee_x" pos="0.1 0 0" size="0.005 .1"  quat="-0.707105  1 -0.707108 1 " rgba="1 0 0 0" type="cylinder" group="1"/>
                 <site name="ee_y" pos="0 0.1 0" size="0.005 .1" quat="-0.707105 -0.707108 0 1" rgba="0 1 0 0" type="cylinder" group="1"/>
                 <site name="ee_z" pos="0 0 0.1" size="0.005 .1" quat="-1 0 0 0" rgba="0 0 1 0" type="cylinder" group="1"/>
                 <!-- This site was added for visualization. -->
                 <site name="grip_site_cylinder" pos="0 0 0" size="0.005 10" rgba="0 1 0 0.3" type="cylinder" group="1"/>
-            </body>
-           <body name="wx250s/gripper_prop_link" pos="0.069 0 0">
-                 <inertial pos="0.000846 -1.6817e-06 4.2e-05" quat="-0.000544073 -0.000402553 -0.376169 0.926551" mass="0.00434" diaginertia="1.1156e-06 9.02926e-07 2.63673e-07" />
-                 <joint name="gripper" pos="0 0 0" axis="1 0 0" frictionloss="0.1" />
-                 <geom pos="-0.0685 0 0" quat="0.707107 0 0 0.707107" type="mesh" mesh="wx250s_8_gripper_prop" />
-                 <geom type="mesh" contype="0" quat="0.707107 0 0 0.707107" conaffinity="0" group="1" mesh="wx250s_8_gripper_prop" name="gripper_prop_link" pos="-0.0685 0 0" rgba="1 1 1 1"/>
-          </body>
-          <body name="wx250s/left_finger_link" pos="0.084 0.007 0">
+            </body>          
+          <body name="wx250s/left_finger_link" pos="-0.078 0.009 0">
                  <inertial pos="0.013816 0 0" quat="0.463902 0.463902 0.533661 -0.533661" mass="0.016246" diaginertia="4.79509e-06 3.7467e-06 1.48651e-06" />
                  <joint name="left_finger" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="0.015 0.037" frictionloss="0.1" />
-                 <geom pos="0 0.005 0" quat="0 0 0 -1" type="mesh" mesh="wx250s_10_gripper_finger" />
-                 <geom type="mesh" contype="0" quat="0 0 0 -1" conaffinity="0" group="1" mesh="wx250s_10_gripper_finger" name="left_finger_link" pos="0 0.005 0" rgba="1 1 1 1"/>
+                 <geom pos="0 0.005 0" quat="0 0.707107 0 0" type="mesh" mesh="wx250s_10_gripper_finger" />
+                 <geom type="mesh" contype="0" quat="0 0.707107 0 0" conaffinity="0" group="1" mesh="wx250s_10_gripper_finger" name="left_finger_link" pos="0 0.005 0" rgba="1 1 1 1"/>
           </body>
-          <body name="wx250s/right_finger_link" pos="0.084 -0.007 0">
+          <body name="wx250s/right_finger_link" pos="-0.078 -0.009 0">
                  <inertial pos="0.013816 0 0" quat="0.463902 -0.463902 0.533661 -0.533661" mass="0.016246" diaginertia="4.79509e-06 3.7467e-06 1.48651e-06" />
                  <joint name="right_finger" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="-0.037 -0.015" frictionloss="0.1" />
-                 <geom pos="0 -0.005 0" quat="0 0 1 0" type="mesh" mesh="wx250s_10_gripper_finger" />
-                 <geom type="mesh" contype="0" quat="0 0 1 0" conaffinity="0" group="1" mesh="wx250s_10_gripper_finger" name="right_finger_link" pos="0 -0.005 0" rgba="1 1 1 1"/>
+                 <geom pos="0 -0.005 0" quat="0.707107 0 0 0" type="mesh" mesh="wx250s_10_gripper_finger" />
+                 <geom type="mesh" contype="0" quat="0.707107 0 0 0" conaffinity="0" group="1" mesh="wx250s_10_gripper_finger" name="right_finger_link" pos="0 -0.005 0" rgba="1 1 1 1"/>
                  </body>
                  </body>
     </worldbody>

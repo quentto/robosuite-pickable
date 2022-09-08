@@ -29,7 +29,7 @@ class wx250s(ManipulatorModel):
 
     @property
     def default_controller_config(self):
-        return ""
+        return "OSC_POSE"
 
     @property
     def init_qpos(self):
