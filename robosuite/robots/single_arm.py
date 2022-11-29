@@ -179,7 +179,7 @@ class SingleArm(Manipulator):
             # Now, reset the gripper if necessary
             if self.has_gripper:
                 self.sim.data.qpos[self._ref_gripper_joint_pos_indexes] = self.gripper.init_qpos
-
+        
         # Update base pos / ori references in controller
         self.controller.update_base_pose(self.base_pos, self.base_ori)
 
@@ -255,14 +255,15 @@ class SingleArm(Manipulator):
         if self.has_gripper:
             self.grip_action(gripper=self.gripper, gripper_action=gripper_action)
 
-        # Apply joint torque control
+        # Apply joint torque control        
         self.sim.data.ctrl[self._ref_joint_actuator_indexes] = self.torques
 
         # If this is a policy step, also update buffers holding recent values of interest
         if policy_step:
             # Update proprioceptive values
             self.recent_qpos.push(self._joint_positions)
-            self.recent_actions.push(action)
+            #self.recent_actions.ush(action)
+            #AttributeError: 'DeltaBuffer' object has no attribute 'ush'
             self.recent_torques.push(self.torques)
             self.recent_ee_forcetorques.push(np.concatenate((self.ee_force, self.ee_torque)))
             self.recent_ee_pose.push(np.concatenate((self.controller.ee_pos, T.mat2quat(self.controller.ee_ori_mat))))
