@@ -29,8 +29,8 @@ class wx250sBase(GripperModel):
     @property
     def _important_geoms(self):
         return {
-            "left_fingerpad": [],
-            "right_fingerpad": [],
+            "left_finger": [],
+            "right_finger": [],
         }
 
 
